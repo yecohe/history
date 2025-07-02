@@ -10,7 +10,7 @@ st.title("📸 Show Your History")
 
 # Game session state
 if "game_id" not in st.session_state:
-    st.session_state.game_id = str(uuid.uuid4())[:6].upper()
+    st.session_state.game_id = None
 if "players" not in st.session_state:
     st.session_state.players = {}
 if "photos" not in st.session_state:
@@ -21,6 +21,19 @@ if "reveal" not in st.session_state:
     st.session_state.reveal = False
 if "current_photo" not in st.session_state:
     st.session_state.current_photo = 0
+
+# Initial screen: New Game or Existing Game
+if st.session_state.game_id is None:
+    st.subheader("Start or Join a Game")
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("New Game"):
+            st.session_state.game_id = str(uuid.uuid4())[:6].upper()
+    with col2:
+        existing_id = st.text_input("Enter Game ID")
+        if st.button("Join Game") and existing_id:
+            st.session_state.game_id = existing_id.upper()
+    st.stop()
 
 st.sidebar.header("Game Code")
 st.sidebar.code(st.session_state.game_id)
