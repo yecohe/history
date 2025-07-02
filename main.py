@@ -3,7 +3,6 @@ import uuid
 import random
 from PIL import Image
 from io import BytesIO
-import tempfile
 import os
 import sqlite3
 import datetime
