@@ -4,6 +4,7 @@ import random
 from PIL import Image
 from io import BytesIO
 import os
+import tempfile
 import sqlite3
 import datetime
 
